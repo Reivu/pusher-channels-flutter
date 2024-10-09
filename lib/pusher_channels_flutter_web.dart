@@ -62,8 +62,7 @@ class PusherChannelsFlutterWeb {
       const StandardMethodCodec(),
       registrar,
     );
-    pluginInstance.methodChannel!
-        .setMethodCallHandler(pluginInstance.handleMethodCall);
+    pluginInstance.methodChannel!.setMethodCallHandler(pluginInstance.handleMethodCall);
   }
 
   Future<dynamic> handleMethodCall(MethodCall call) async {
@@ -93,8 +92,7 @@ class PusherChannelsFlutterWeb {
       default:
         throw PlatformException(
           code: 'Unimplemented',
-          details:
-              'pusher_channels for web doesn\'t implement \'${call.method}\'',
+          details: 'pusher_channels for web doesn\'t implement \'${call.method}\'',
         );
     }
   }
@@ -132,8 +130,7 @@ class PusherChannelsFlutterWeb {
     final Map<String, dynamic>? userInfo = data['user_info'];
 
     if (event == 'pusher_internal:subscription_error') {
-      methodChannel!.invokeMethod(
-          'onSubscriptionError', {'message': msg['error'], 'error': data});
+      methodChannel!.invokeMethod('onSubscriptionError', {'message': msg['error'], 'error': data});
     } else if (event == 'pusher_internal:member_added') {
       methodChannel!.invokeMethod('onMemberAdded', {
         'channelName': channel,
@@ -167,8 +164,7 @@ class PusherChannelsFlutterWeb {
   }
 
   void onStateChange(dynamic jsState) {
-    final Map<String, dynamic> state =
-        dartify<Map<String, dynamic>>(jsState ?? {});
+    final Map<String, dynamic> state = dartify<Map<String, dynamic>>(jsState ?? {});
     final String current = state['current'] ?? '';
     final String previous = state['previous'] ?? '';
     methodChannel!.invokeMethod('onConnectionStateChange', {
